@@ -1,0 +1,269 @@
+
+
+
+{% extends 'base.html' %}
+{% block title %}
+    Events
+{% endblock %}
+
+
+{% load static %}
+
+
+{% block content %}
+
+
+
+ <div class="intro_wrapper" style="background: url({% static 'images/banner/inner_banner_5.jpg' %}) no-repeat center center !important; height: 600px;">
+        <div class="container">
+            <div class="row">
+                 <div class="col-sm-12 col-md-8 col-lg-8">
+                    <div class="intro_text">
+                        <h1>Event Page</h1>
+                        <div class="pages_links">
+                            <a href="#" title="">Home</a>
+                            <a href="#" title="" class="active">Event Page</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</header> <!-- End header -->
+
+
+
+<section class="login_signup_option">
+    <div class="l-modal is-hidden--off-flow js-modal-shopify">
+        <div class="l-modal__shadow js-modal-hide"></div>
+        <div class="login_popup login_modal_body">
+            <div class="Popup_title d-flex justify-content-between">
+                <h2 class="hidden">&nbsp;</h2>
+                <!-- Nav tabs -->
+                <div class="row">
+                    <div class="col-12 col-lg-12 col-md-12 col-lg-12 login_option_btn">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#login" role="tab">Login</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#panel2" role="tab">Register</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-lg-12 col-md-12 col-lg-12">
+                        <!-- Tab panels -->
+                        <div class="tab-content card">
+                            <!--Login-->
+                            <div class="tab-pane fade in show active" id="login" role="tabpanel">
+                                <form action="#">
+                                    <div class="row">
+                                        <div class="col-12 col-lg-12 col-md-12 col-lg-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Email</label>
+                                                <input type="email" class="form-control" placeholder="Username">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-12 col-md-12 col-lg-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Password</label>
+                                                <input type="password" class="form-control" placeholder="Password">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-lg-12 col-md-12 col-lg-12 d-flex justify-content-between login_option">
+                                            <a href="forgot-password.html" title="" class="forget_pass">Forget Password ?</a>
+                                            <button type="submit" class="btn btn-default login_btn">Login</button>
+                                        </div>
+                                        <div class="col-12 col-lg-12 col-md-12 col-lg-12">
+                                            <div class="social_login">
+                                                <div class="social_items">
+                                                    <button class="google_login google">Login Google</button>
+                                                    <button class="google_login facebook">Login Facebook</button>
+                                                    <button class="google_login twitter">Login Twitter</button>
+                                                    <button class="google_login linkdin">Login Linkdin</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!--/.Panel 1-->
+                            <!--Panel 2-->
+                            <div class="tab-pane fade" id="panel2" role="tabpanel">
+                                <form action="#" class="register">
+                                    <div class="row">
+                                        <div class="col-12 col-lg-12 col-md-12 col-lg-12">
+                                            <div class="form-group">
+                                                <label  class="control-label">Name</label>
+                                                <input type="text" class="form-control" placeholder="Username">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-12 col-md-12 col-lg-12">
+                                            <div class="form-group">
+                                                <label  class="control-label">Email</label>
+                                                <input type="email" class="form-control" placeholder="Email">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-12 col-md-12 col-lg-12">
+                                            <div class="form-group">
+                                                <label  class="control-label">Password</label>
+                                                <input type="password" class="form-control" placeholder="Password">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-lg-12 col-md-12 col-lg-12 d-flex justify-content-between login_option">
+                                            <button type="submit" class="btn btn-default login_btn">Register</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div><!--/.Panel 2-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>  <!-- End Login Signup Option -->
+
+
+
+
+<!-- Start Events Area Section -->
+<section class="events-area">
+    <div class="container">
+        <div class="row">
+
+
+<!--            {% for event in events %}-->
+
+<!--                {% if forloop.counter0|divisibleby:4 %}<div class="clear"></div>{% endif %}-->
+
+<!--                <div class="product {% if forloop.counter0|divisibleby:4 %}col{% else %}col20{% endif    %}">-->
+<!--                    Lorem Ipsum is simply dummy text-->
+<!--                </div>-->
+
+<!--            {% endfor %}-->
+
+
+            {%if events%}
+            {% for event in events %}
+
+            {% if forloop.counter|divisibleby:2 %}
+
+            <div class="col-sm-12 events_full_box">
+                <div class="events_single">
+                    <div class="event_banner">
+                        <a href="{% url 'events:event_detail' event.id %}"><img src="{{ event.image.url }}" alt="" class="img-fluid"></a>
+                    </div>
+                    <div class="event_info">
+                        <h3><a href="{% url 'events:event_detail' event.id %}" title="">{{ event.name }}</a></h3>
+                        <div class="events_time">
+                            <span class="time"><i class="far fa-clock"></i>{{ event.time_from }} - {{ event.time_to }}</span>
+                            <span><i class="fas fa-map-marker-alt"></i>{{ event.location }}</span>
+                        </div>
+                        <p>{{ event.content}}</p>
+<!--                        {{event.date|date:"D d M Y"}}-->
+                        <div class="event_dete">
+                            <span class="date"> {{event.date|date:"d"}} </span>
+                            <span>{{event.date|date:"M"}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% else %}
+
+            <div class="col-sm-12 events_full_box">
+                <div class="events_single events_single_left">
+                    <div class="event_info">
+                        <h3><a href="{% url 'events:event_detail' event.id %}" title="">{{ event.name }}</a></h3>
+                        <div class="events_time">
+                            <span class="time"><i class="far fa-clock"></i>{{ event.time_from }} - {{ event.time_to }}</span>
+                            <span><i class="fas fa-map-marker-alt"></i>{{ event.location}}</span>
+                        </div>
+                        <p>{{ event.content }}</p>
+                    </div>
+                    <div class="event_banner">
+                        <a href="{% url 'events:event_detail' event.id %}"><img src="{{ event.image.url }}" alt="" class="img-fluid"></a>
+                    </div>
+                    <div class="event_dete">
+                        <span class="date">{{event.date|date:"d"}}</span>
+                        <span>{{event.date|date:"M"}}</span>
+                    </div>
+                </div>
+            </div>
+
+
+            {% endif %}
+
+            {% endfor %}
+            {% endif %}
+
+
+
+
+
+
+
+
+
+
+             <div class="pagination_blog">
+
+
+                <div class="p-box-2 text-center">
+                    <nav aria-label="Page navigation example">
+                        {% if events.has_other_pages %}
+
+                        <ul class="pagination">
+
+                            {% if  events.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ events.previous_page_number }}"><i class="fa fa-angle-left"></i></a>
+                                </li>
+                            {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link"><i class="fa fa-angle-left"></i></a>
+                            </li>
+                            {% endif %}
+
+
+
+
+                            {% for i in events.paginator.page_range  %}
+                            {% if courses.number == i %}
+                                <li class="page-item"><a class="page-link active" href="#">{{ i }}</a></li>
+                            {% else %}
+
+                                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                            {% endif %}
+                            {% endfor %}
+
+
+
+
+                            {% if  events.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ events.next_page_number }}"><i class="fa fa-angle-right"></i></a>
+                                </li>
+                            {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link"><i class="fa fa-angle-right"></i></a>
+                            </li>
+                            {% endif %}
+                        </ul>
+
+                        {% endif %}
+                    </nav>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section><!-- ./ End Events Area section -->
+
+
+
+{% endblock %}
+

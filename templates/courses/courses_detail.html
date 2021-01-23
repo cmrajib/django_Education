@@ -1,0 +1,597 @@
+
+
+
+{% extends 'base.html' %}
+{% block title %}
+    Course Details
+{% endblock %}
+
+{% load humanize %}
+
+{% load static %}
+
+
+{% block content %}
+
+
+<div class="intro_wrapper" style="background: url({% static 'images/banner/inner_banner_5.jpg' %}) no-repeat center center !important; height: 600px;">
+        <div class="container">
+            <div class="row">
+                 <div class="col-sm-12 col-md-8 col-lg-8">
+                    <div class="intro_text">
+                        <h1>Courses Details</h1>
+                        <div class="pages_links">
+                            <a href="{% url 'home:home' %}" title="">Home</a>
+                            <a href="{% url 'courses:courses' %}" title="">Course</a>
+                            Course Details
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</header> <!-- End header -->
+
+
+
+<section class="blog_wrapper" id="courses_details_wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-8 col-lg-8">
+                <div class="courses_details">
+                    <div class="single-curses-contert">
+                        <h2>{{ course.name }}</h2>
+                        <div class="review-option">
+
+                            {% for instructor in course.instructor.all %}
+
+                            <div class="teacher-info single_items single_items_shape">
+
+                                <img src="{{ instructor.image.url }}" alt="" class="img-fluid">
+
+                                <div class="teacher-name">
+
+                                    <span>Teacher</span>
+
+                                    <span>{{ instructor.name }}</span>
+
+                                </div>
+
+
+                            </div>
+
+                            {% endfor %}
+                            <div class="review-rank single_items single_items_shape">
+                                <span>Reviews</span>
+                                <div class="rank-icons">
+                                    <ul class="list-unstyled">
+                                        <li><i class="fa fa-star review-icon"></i></li>
+                                        <li><i class="fa fa-star review-icon"></i></li>
+                                        <li><i class="fa fa-star review-icon"></i></li>
+                                        <li><i class="fa fa-star review-icon"></i></li>
+                                        <li><i class="fa fa-star review-icon"></i></li>
+                                        <li><span>(8 Reviews)</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="teacher_fee single_items ">
+                                <span>Price</span>
+                                <span class="courses_price">$
+                                {% if course.discount_price > 0 %}
+                                    {{ course.discount_price }}
+                                {% else %}
+                                    {{ course.price }}
+                                {% endif %}
+                                </span>
+                            </div>
+                            <div class="buy_btn single_items">
+                                <a href="#" title="">Buy Now</a>
+                            </div>
+                        </div>
+                        <div class="details-img-bxo">
+                            <img src="{{ course.image.url }}" style="width:800px;" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                    <div class="courses_tab_wrapper">
+                        <div class="courses_details_nav_tabs">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item"><a class="nav-link active" href="#information" role="tab" data-toggle="tab">Information</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#curricularm" role="tab" data-toggle="tab">Curricularm</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#instructor" role="tab" data-toggle="tab">Instructor</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#reviews" role="tab" data-toggle="tab">Reviews</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Tab panes -->
+                        <div class="tab_contents tab-content">
+                            <div role="tabpanel" class="tab-pane fade in active show" id="information">
+                                <h3>Courses Description <span>:</span></h3>
+                                <p>{{ course.course_description }}</p>
+                                <h3>What Will I Learn? <span>:</span></h3>
+                                <p>{{ course.what_will_i_learn }}</p>
+
+                                <h3>Learning Outcomes <span>:</span></h3>
+                                <p>{{ learning_outcomes }}</p>
+
+                                <div class="social_wrapper d-flex">
+                                    <span>Share : </span>
+                                    <ul class="social-items d-flex list-unstyled">
+                                        <li><a href="#"><i class="fab fa-facebook-f fb_icon"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-twitter tw_icon"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-linkedin-in link_icon"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-instagram in_icon"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="curricularm">
+                                <div class="curriculum-text-box">
+                                    <div class="curriculum-section">
+                                        <div class="panel-group" id="accordion">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h4 class="panel-title click">
+                                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" class="">
+                                                        1. Welcome to the Courses<span>0/{{ Welcome_To_the_courses|length }}</span></a>
+                                                    </h4>
+
+                                                </div>
+                                                <div id="collapse1" class="panel-collapse collapse in show">
+                                                    <div class="panel-body">
+
+                                                        {% if Welcome_To_the_courses %}
+                                                        {% for Course_Curricularm in Welcome_To_the_courses %}
+                                                        <div class="curriculum-single">
+                                                            <div class="lecture">
+                                                                <span><i class="fa fa-file-text-o">{{ Course_Curricularm.lecture }}</i></span>
+                                                                <span><i class="fa fa-clock-o"></i>{{ Course_Curricularm.duration }}</span>
+                                                            </div>
+                                                            <a href="#">Preview</a>
+                                                        </div>
+                                                        {% endfor %}
+                                                        {% endif %}
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+
+                                                <div class="panel-heading">
+                                                    <h4 class="panel-title">
+                                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" class="collapsed">
+                                                        2. How to use Wordpress<span>0/{{ How_to_use|length }}</span></a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapse2" class="panel-collapse collapse">
+                                                    <div class="panel-body">
+
+                                                        {% if How_to_use %}
+                                                        {% for Course_Curricularm in How_to_use %}
+                                                        <div class="curriculum-single">
+                                                            <div class="lecture">
+                                                                <span><i class="fa fa-file-text-o"></i>{{ Course_Curricularm.lecture }}</span>
+                                                                <span><i class="fa fa-clock-o"></i>{{ Course_Curricularm.duration }}</span>
+                                                            </div>
+                                                            <a href="#">Preview</a>
+                                                        </div>
+                                                        {% endfor %}
+                                                        {% endif %}
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h4 class="panel-title">
+                                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3" class="collapsed">
+                                                    3. Final chapters<span>0/{{ Final_chapters|length }}</span></a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapse3" class="panel-collapse collapse">
+                                                    <div class="panel-body">
+                                                        {% if Final_chapters %}
+                                                        {% for Course_Curricularm in Final_chapters %}
+
+                                                         <div class="curriculum-single">
+                                                            <div class="lecture">
+                                                                <span><i class="fa fa-file-text-o"></i>{{ Course_Curricularm.lecture }}</span>
+                                                                <span><i class="fa fa-clock-o"></i>{{ Course_Curricularm.duration }}</span>
+                                                            </div>
+                                                            <a href="#">Preview</a>
+                                                        </div>
+                                                        {% endfor %}
+                                                        {% endif %}
+
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div> <!-- .curriculum-section-text END -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="instructor">
+                                <div class="courses_teacher">
+
+                                    {% for instructor in course.instructor.all %}
+
+                                    <div class="tutor_signle">
+                                        <div class="tutor_pro">
+                                            <a href="#" title=""><img src="{{ instructor.user.image.url }}" alt="" class="img-fluid"></a>
+                                        </div>
+                                        <div class="teachers_name">
+                                            <h5><a href="#" title="">{{ instructor.name }}</a></h5>
+                                            <span>{{ instructor.designation }}</span>
+                                        </div>
+                                    </div>
+
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+
+
+
+                            <div role="tabpanel" class="tab-pane fade" id="reviews">
+                                <!-- Blog Comment Wrappper-->
+
+
+                                <div class="review-content">
+                                    <div class="five-star-rating">
+                                        <div class="rating_box_count">
+                                            <span class="five">5</span>
+                                            <ul class="list-unstyled">
+                                                <li><i class="fas fa-star"></i></li>
+                                                <li><i class="fas fa-star"></i></li>
+                                                <li><i class="fas fa-star"></i></li>
+                                                <li><i class="fas fa-star"></i></li>
+                                                <li><i class="fas fa-star"></i></li>
+                                            </ul>
+                                            <span>8 Ratings</span>
+                                        </div>
+                                    </div>
+                                    <div class="rating-box">
+                                        <div class="detailed-rating">
+                                            <div class="stars">
+                                                <div class="key">5 stars</div>
+                                                <div class="bar">
+                                                    <div class="full_bar">
+                                                         <span style="width: 100%"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="value">8</div>
+                                            </div>
+
+                                            <div class="stars">
+                                                <div class="key">4 stars</div>
+                                                <div class="bar">
+                                                    <div class="full_bar">
+                                                         <span style="width: 0%"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="value">0</div>
+                                            </div>
+
+                                            <div class="stars">
+                                                <div class="key">3 stars</div>
+                                                <div class="bar">
+                                                    <div class="full_bar">
+                                                         <span style="width: 0%"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="value">0</div>
+                                            </div>
+                                            <div class="stars">
+                                                <div class="key">2 stars</div>
+                                                <div class="bar">
+                                                    <div class="full_bar">
+                                                         <span style="width: 0%"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="value">0</div>
+                                            </div>
+                                            <div class="stars">
+                                                <div class="key">1 star</div>
+                                                <div class="bar">
+                                                    <div class="full_bar">
+                                                        <span style="width: 0%"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="value">0</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <form method="post" >
+                                {% csrf_token %}
+                                 <div class="col-12 col-sm-12 col-md-12 form-group">
+                                    {{ form }}
+                                 </div>
+                                <div class="col-12 col-sm-12 col-md-12 submit-btn">
+                                    <button type="submit" class="text-center">Send Massage</button>
+                                </div>
+
+
+
+                            </form>
+
+
+
+                                <div class="commnet-wrapper">
+                                     <div class="comment-list-items">
+                                        <div class="comment-list-wrapper">
+                                            {% if course_review %}
+                                            {% for coursereview in course_review %}
+                                            <div class="comment-list">
+                                                <div class="commnet_img">
+                                                    <img src="{{ coursereview.user.image.url }}" alt="member img" class="img-fluid">
+                                                </div>
+                                                <div class="comment-text">
+                                                    <div class="author_info d-flex justify-content-between">
+                                                        <a href="#" class="author_name">{{ coursereview.user.full_name }}</a>
+                                                        <span>{{ coursereview.date|naturaltime }}</span>
+                                                    </div>
+                                                    <div class="rating">
+                                                        <ul class="rating d-flex justify-content-start">
+
+                                                            {% for rating in coursereview.rating %}
+                                                            <li><i class="fas fa-star"></i></li>
+                                                            {% endfor %}
+
+
+                                                        </ul>
+                                                    </div>
+                                                    <p>{{ coursereview.comments|slice:":60" }}</p>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                            {% endif %}
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!--End Blog Siderbar Left-->
+
+
+            <div class="col-12 col-sm-12 col-md-4 col-lg-4 blog_wrapper_right ">
+                <div class="blog-right-items">
+                    <div class="courses_features widget_single">
+                        <div class="items-title">
+                            <h3 class="title">Courses Features</h3>
+                        </div>
+                        <div class="features_items">
+                            <ul class="list-unstyled">
+
+                                {% if feature_courses %}
+                                {% for feature_course in feature_courses %}
+                                <li><a href="{% url 'courses:course_detail' feature_course.slug %}" title=""><i class="flaticon-page"></i> {{ feature_course.name }} </a></li>
+                                {% endfor %}
+                                {% endif %}
+
+
+                            </ul>
+                        </div>
+                        <img src="{% static 'images/shapes/testimonial_2_shpe_2.png' %}" alt="" class="courses_feaures_shpe">
+                    </div>
+
+
+
+                    <div class="recent_post_wrapper popular_courses_post widget_single">
+                        <div class="items-title">
+                            <h3 class="title">Our Popular Courses</h3>
+                        </div>
+
+                        {% if popular_courses %}
+                        {% for popular_course in popular_courses %}
+                        <div class="single-post">
+                            <div class="recent_img">
+                                 <a href="#" title=""><img src="{{ popular_course.image.url }}" alt="" class="img-fluid"></a>
+                            </div>
+                            <div class="post_title">
+                                <a href="{% url 'courses:course_detail_feature_course' popular_course.slug %}" title="">{{ popular_course.name }}</a>
+                                <div class="courses_price">
+                                    <div class="price"><span><del>{{ popular_course.price }}$</del></span> <span class="new_price">{{ popular_course.discount_price }}$</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+
+
+
+
+                    </div>
+
+
+                    <div class="archives widget_single">
+                        <div class="items-title">
+
+                            <h3 class="title">All Categories</h3>
+
+                        </div>
+                        <div class="archives-items">
+                            <ul class="list-unstyled">
+
+                                {% if categories %}
+                                {% for category in categories %}
+                                    <li><a href="{% url 'courses:course_category' category.id %}" title="">{{ category.name }} </a></li>
+                                {% endfor %}
+                                {% endif %}
+
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- End Right Sidebar-->
+
+        </div>
+    </div>
+</section><!-- ./ End  Blog Wrapper-->
+
+
+
+<!--Start Courses Area Section-->
+<section class="popular_courses" id="related_courses_wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="title">
+                    <h2>Related Courses</h2>
+                </div><!-- ends: .section-header -->
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div id="related_courses" class="owlCarousel">
+                    <div class="single-courses">
+                        <div class="courses_banner_wrapper">
+                            <div class="courses_banner"><a href="#"><img src="{% static 'images/courses/courses_1.jpg' %}" alt="" class="img-fluid"></a></div>
+                            <div class="purchase_price">
+                                <a href="#" class="read_more-btn">$150</a>
+                            </div>
+                        </div>
+                        <div class="courses_info_wrapper">
+                            <div class="courses_title">
+                                <h3><a href="#">Make Better Decisions</a></h3>
+                                <div class="teachers_name">Teacher - <a href="#" title="">Jhonthan Smith</a></div>
+                            </div>
+                            <div class="courses_info">
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-user"></i>180 Days</li>
+                                    <li><i class="fas fa-calendar-alt"></i>30 Students</li>
+                                </ul>
+                                <a href="#" class="cart_btn">Add to Cart</a>
+                            </div>
+                        </div>
+                    </div><!-- Ends: .single courses -->
+
+
+                    <div class="single-courses">
+                        <div class="courses_banner_wrapper">
+                            <div class="courses_banner"><a href="#"><img src="{% static 'images/courses/courses_2.jpg' %}" alt="" class="img-fluid"></a></div>
+                            <div class="purchase_price">
+                                <a href="#" class="read_more-btn">Free</a>
+                            </div>
+                        </div>
+                        <div class="courses_info_wrapper">
+                            <div class="courses_title">
+                                <h3><a href="#">How To Be A Speaker</a></h3>
+                                <div class="teachers_name">Teacher - <a href="#" title="">Denise Wood</a></div>
+                            </div>
+                            <div class="courses_info">
+                                <ul class="list-unstyled">
+                                    <li><i class="fa fa-user"></i> 180 Days</li>
+                                    <li><i class="fa fa-comment"></i>50 Students</li>
+                                </ul>
+                                <a href="#" class="cart_btn">Add to Cart</a>
+                            </div>
+                        </div>
+                    </div><!-- Ends: .single courses -->
+
+                    <div class="single-courses">
+                        <div class="courses_banner_wrapper">
+                            <div class="courses_banner"><a href="#"><img src="{% static 'images/courses/courses_3.jpg' %}" alt="" class="img-fluid"></a></div>
+                            <div class="purchase_price">
+                                <a href="#" class="read_more-btn">120$</a>
+                            </div>
+                        </div>
+                        <div class="courses_info_wrapper">
+                            <div class="courses_title">
+                                <h3><a href="#">Network Introductions</a></h3>
+                                <div class="teachers_name">Teacher - <a href="#" title="">Preston Marshall</a></div>
+                            </div>
+                            <div class="courses_info">
+                                <ul class="list-unstyled">
+                                    <li><i class="fa fa-user"></i> 140 Days</li>
+                                    <li><i class="fa fa-comment"></i>60 Students</li>
+                                </ul>
+                                <a href="#" class="cart_btn">Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single-courses">
+                        <div class="courses_banner_wrapper">
+                            <div class="courses_banner"><a href="#"><img src="{% static 'images/courses/courses_3.jpg' %}" alt="" class="img-fluid"></a></div>
+                            <div class="purchase_price">
+                                <a href="#" class="read_more-btn">120$</a>
+                            </div>
+                        </div>
+                        <div class="courses_info_wrapper">
+                            <div class="courses_title">
+                                <h3><a href="#">Network Introductions</a></h3>
+                                <div class="teachers_name">Teacher - <a href="#" title="">Preston Marshall</a></div>
+                            </div>
+                            <div class="courses_info">
+                                <ul class="list-unstyled">
+                                    <li><i class="fa fa-user"></i> 140 Days</li>
+                                    <li><i class="fa fa-comment"></i>60 Students</li>
+                                </ul>
+                                <a href="#" class="cart_btn">Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single-courses">
+                        <div class="courses_banner_wrapper">
+                            <div class="courses_banner"><a href="#"><img src="{% static 'images/courses/courses_3.jpg' %}" alt="" class="img-fluid"></a></div>
+                            <div class="purchase_price">
+                                <a href="#" class="read_more-btn">120$</a>
+                            </div>
+                        </div>
+                        <div class="courses_info_wrapper">
+                            <div class="courses_title">
+                                <h3><a href="#">Network Introductions</a></h3>
+                                <div class="teachers_name">Teacher - <a href="#" title="">Preston Marshall</a></div>
+                            </div>
+                            <div class="courses_info">
+                                <ul class="list-unstyled">
+                                    <li><i class="fa fa-user"></i> 140 Days</li>
+                                    <li><i class="fa fa-comment"></i>60 Students</li>
+                                </ul>
+                                <a href="#" class="cart_btn">Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single-courses">
+                        <div class="courses_banner_wrapper">
+                            <div class="courses_banner"><a href="#"><img src="{% static 'images/courses/courses_3.jpg' %}" alt="" class="img-fluid"></a></div>
+                            <div class="purchase_price">
+                                <a href="#" class="read_more-btn">120$</a>
+                            </div>
+                        </div>
+                        <div class="courses_info_wrapper">
+                            <div class="courses_title">
+                                <h3><a href="#">Network Introductions</a></h3>
+                                <div class="teachers_name">Teacher - <a href="#" title="">Preston Marshall</a></div>
+                            </div>
+                            <div class="courses_info">
+                                <ul class="list-unstyled">
+                                    <li><i class="fa fa-user"></i> 140 Days</li>
+                                    <li><i class="fa fa-comment"></i>60 Students</li>
+                                </ul>
+                                <a href="#" class="cart_btn">Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- Ends: .single courses -->
+            </div><!-- Ends: . -->
+        </div>
+
+    </div>
+</section><!-- ./ End Courses Area section -->
+
+
+
+
+{% endblock %}

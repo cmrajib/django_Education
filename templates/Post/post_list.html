@@ -1,0 +1,234 @@
+
+{% extends 'base.html' %}
+{% block title %}
+ Blog
+{% endblock %}
+
+
+{% load static %}
+
+
+{% block content %}
+
+
+
+
+
+ <div class="intro_wrapper" style="background: url({% static 'images/banner/inner_banner_1.jpg' %}) no-repeat center center !important; height: 600px;">
+        <div class="container">
+            <div class="row">
+                 <div class="col-sm-12 col-md-8 col-lg-8">
+                    <div class="intro_text">
+                        <h1>Blog Standard</h1>
+                        <div class="pages_links">
+                            <a href="#" title="">Home</a>
+                            <a href="#" title="" class="active">Blog</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</header> <!-- End Header -->
+
+
+
+<section class="login_signup_option">
+    <div class="l-modal is-hidden--off-flow js-modal-shopify">
+        <div class="l-modal__shadow js-modal-hide"></div>
+        <div class="login_popup login_modal_body">
+            <div class="Popup_title d-flex justify-content-between">
+                <h2 class="hidden">&nbsp;</h2>
+                <!-- Nav tabs -->
+                <div class="row">
+                    <div class="col-12 col-lg-12 col-md-12 col-lg-12 login_option_btn">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#login" role="tab">Login</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#panel2" role="tab">Register</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-lg-12 col-md-12 col-lg-12">
+                        <!-- Tab panels -->
+                        <div class="tab-content card">
+                            <!--Login-->
+                            <div class="tab-pane fade in show active" id="login" role="tabpanel">
+                                <form action="#">
+                                    <div class="row">
+                                        <div class="col-12 col-lg-12 col-md-12 col-lg-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Email</label>
+                                                <input type="email" class="form-control" placeholder="Username">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-12 col-md-12 col-lg-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Password</label>
+                                                <input type="password" class="form-control" placeholder="Password">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-lg-12 col-md-12 col-lg-12 d-flex justify-content-between login_option">
+                                            <a href="forgot-password.html" title="" class="forget_pass">Forget Password ?</a>
+                                            <button type="submit" class="btn btn-default login_btn">Login</button>
+                                        </div>
+                                        <div class="col-12 col-lg-12 col-md-12 col-lg-12">
+                                            <div class="social_login">
+                                                <div class="social_items">
+                                                    <button class="google_login google">Login Google</button>
+                                                    <button class="google_login facebook">Login Facebook</button>
+                                                    <button class="google_login twitter">Login Twitter</button>
+                                                    <button class="google_login linkdin">Login Linkdin</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!--/.Panel 1-->
+                            <!--Panel 2-->
+                            <div class="tab-pane fade" id="panel2" role="tabpanel">
+                                <form action="#" class="register">
+                                    <div class="row">
+                                        <div class="col-12 col-lg-12 col-md-12 col-lg-12">
+                                            <div class="form-group">
+                                                <label  class="control-label">Name</label>
+                                                <input type="text" class="form-control" placeholder="Username">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-12 col-md-12 col-lg-12">
+                                            <div class="form-group">
+                                                <label  class="control-label">Email</label>
+                                                <input type="email" class="form-control" placeholder="Email">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-12 col-md-12 col-lg-12">
+                                            <div class="form-group">
+                                                <label  class="control-label">Password</label>
+                                                <input type="password" class="form-control" placeholder="Password">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-lg-12 col-md-12 col-lg-12 d-flex justify-content-between login_option">
+                                            <button type="submit" class="btn btn-default login_btn">Register</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div><!--/.Panel 2-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>  <!-- End Login Signup Option -->
+
+
+
+
+<section class="blog_wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-8 col-lg-8">
+
+                {% if post_list %}
+                {% for post in post_list %}
+
+                <div class="single_blog">
+                    <div class="blog_banner">
+                        <a href="#" title=""><img src="{{ post.image.url }}" alt="" class="img-fluid"></a>
+                    </div>
+
+                    <!--                        {{event.date|date:"D d M Y"}}-->
+
+
+
+
+                    <div class="post_content_wrapper">
+                        <div class="post_date"><p>Posted On : {{ post.created|date:"M d Y" }} - <span>Education Category</span></p></div>
+                        <h3><a href="{% url 'blog:post_detail' post.id %}" title="">{{ post.title }}</a></h3>
+                        <p>{{ post.content|slice:":100" }}</p>
+                        <div class="post_by d-flex justify-content-between">
+                            <a href="{% url 'blog:post_detail' post.id %}" title="">Read More  <i class="flaticon-login-button"></i></a>
+                            <div class="social_wrapper d-flex">
+                                <span>Share On : </span>
+                                <ul class="social-items d-flex list-unstyled">
+                                    <li><a href="#"><i class="fab fa-facebook-f fb_icon"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-twitter tw_icon"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-linkedin-in link_icon"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-instagram in_icon"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <ul class="post_bloger">
+                            <li>BY : Jhon Dheo</li>
+                            <li><i class="fas fa-thumbs-up"></i> 2 Likes</li>
+                            <li><i class="fas fa-comment"></i>{{ post.comment_count }} Comments</li>
+                        </ul>
+                    </div>
+                </div>
+
+                {% endfor %}
+                {% endif %}
+
+
+
+                <div class="pagination_blog">
+                    <div class="p-box-2 text-center">
+                    <nav aria-label="Page navigation example">
+                        {% if post_list.has_other_pages %}
+
+                        <ul class="pagination">
+
+                            {% if  post_list.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ post_list.previous_page_number }}"><i class="fa fa-angle-left"></i></a>
+                                </li>
+                            {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link"><i class="fa fa-angle-left"></i></a>
+                            </li>
+                            {% endif %}
+
+
+
+
+                            {% for i in post_list.paginator.page_range  %}
+                            {% if courses.number == i %}
+                                <li class="page-item"><a class="page-link active" href="#">{{ i }}</a></li>
+                            {% else %}
+
+                                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                            {% endif %}
+                            {% endfor %}
+
+
+
+
+                            {% if  post_list.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ post_list.next_page_number }}"><i class="fa fa-angle-right"></i></a>
+                                </li>
+                            {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link"><i class="fa fa-angle-right"></i></a>
+                            </li>
+                            {% endif %}
+                        </ul>
+
+                        {% endif %}
+                    </nav>
+                </div>
+
+                </div>
+            </div> <!-- End Blog Right Side--->
+
+            {% include 'right_side.html' %}
+
+
+        </div>
+    </div>
+</section><!-- ./ End  Blog Wrapper-->
+{% endblock %}

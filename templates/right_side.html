@@ -1,0 +1,106 @@
+
+{% load static %}
+{% load custom_tags %}
+
+<div class="col-12 col-sm-12 col-md-4 col-lg-4 blog_wrapper_right ">
+    <div class="blog-right-items">
+
+        <div class="become_a_teacher widget_single">
+            <div class="form-full-box">
+                <div class="form_title">
+                    <h2>Become A Membar</h2>
+                    <p>Get Instant access to <span>5000+ </span>Video courses </p>
+                </div>
+                <form>
+                    <div class="register-form">
+                        <div class="row">
+                            <div class="col-12 col-xs-12 col-md-12">
+                                <div class="form-group">
+                                    <label><i class="fas fa-user"></i></label>
+                                    <input class="form-control" name="name" placeholder="Write Your Name" required="" type="text">
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-xs-12 col-md-12">
+                                <div class="form-group">
+                                    <label><i class="flaticon-email"></i></label>
+                                    <input class="form-control" name="email" placeholder="Write Your E-mail" required="" type="email">
+                                </div>
+                            </div>
+                            <div class="col-12 col-xs-12 col-md-12">
+                                <div class="form-group massage_text">
+                                    <label><i class="flaticon-copywriting"></i></label>
+                                    <textarea class="form-control" placeholder="Write Something Here" required="" ></textarea>
+                                </div>
+                            </div>
+                            <div class="col-12 col-xs-12 col-md-12 register-btn-box">
+                                <button class="register-btn" type="submit">Send Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <div class="recent_post_wrapper widget_single">
+            <div class="items-title">
+                <h3 class="title">Recent Post</h3>
+            </div>
+
+            {% recent_posts as recent_posts %}
+            {% for post in recent_posts %}
+
+            <div class="single-post">
+                <div class="recent_img">
+                     <a href="{% url 'blog:post_detail' post.id %}" title=""><img src="{{ post.image.url }}" alt="" class="img-fluid"></a>
+                </div>
+                <div class="post_title">
+                    <a href="{% url 'blog:post_detail' post.id %}" title="">{{ post.title }}</a>
+                    <div class="post-date">
+                        <span>{{ post.created|date:"M d Y" }}</span>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+
+
+        </div>
+
+        <div class="archives widget_single">
+            <div class="items-title">
+                <h3 class="title">All Categories</h3>
+            </div>
+            <div class="archives-items">
+                <ul class="list-unstyled">
+
+                    {% categories as categories %}
+                    {% if categories %}
+                    {% for category in categories %}
+                    <li><a href="{% url 'blog:post_by_category' category.slug %}">{{ category.category_name }} </a></li>
+                    {% endfor %}
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="popular_tags widget_single">
+            <div class="items-title">
+                <h3 class="title">Popular Tags</h3>
+            </div>
+            <div class="tags-items">
+                <ul class="list-unstyled">
+
+                    {% tags as tags %}
+                    {% if tags %}
+                    {% for tag in tags %}
+                    <li><a href="{% url 'blog:post_by_tag' tag.slug %}" title="">{{ tag.name }}</a></li>
+                    {% endfor %}
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div><!-- ./ End  Blog Right Wrapper-->
